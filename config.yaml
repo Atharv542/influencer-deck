@@ -1,0 +1,66 @@
+# ---------------------------------------------------------------
+# Campaign configuration. Change the brand + niche here, not in code.
+# ---------------------------------------------------------------
+niche: fashion_beauty
+
+brand:
+  name: "GlowLane"                       # <-- replace with your (or a demo) brand
+  product: "a vegan skincare and cosmetics line"
+  value_prop: "a free product kit, a 15% affiliate commission and full creative freedom"
+  sender_name: "Alex"                    # <-- your name
+  sender_title: "Partnerships"
+
+paths:
+  db: "data/outreach.db"
+  output_dir: "outputs"
+  suppression_list: "data/suppression.txt"   # one email per line; never contacted
+
+discovery:
+  target_in_range: 60          # stop once this many 5k-100k channels have been found
+  pages_per_query: 2           # each page = 1 search call = 100 YouTube quota units
+  search_kinds: ["channel", "video"]
+  region_code: null            # e.g. "US", "IN", "GB" (null = worldwide)
+  relevance_language: "en"
+  recent_videos: 10            # videos analysed per channel for engagement + themes
+  queries:
+    - "skincare routine"
+    - "makeup tutorial"
+    - "get ready with me grwm"
+    - "outfit ideas ootd"
+    - "thrift haul fashion"
+    - "haircare routine"
+    - "drugstore makeup review"
+    - "capsule wardrobe styling"
+    - "korean skincare review"
+    - "fashion lookbook"
+
+filters:
+  min_followers: 5000
+  max_followers: 100000
+  min_engagement_rate: 1.5     # percent; median of (likes+comments)/views over recent videos
+  min_videos_for_engagement: 3
+  max_days_since_last_upload: 90
+  min_niche_score: 6           # keyword evidence required in channel text + recent videos
+  allowed_countries: []        # e.g. ["US","GB","IN"]; empty = any. Unknown country = note, not fail
+  blocked_keywords: ["casino", "betting", "forex signals", "get rich quick", "adult content", "18+", "nsfw", "crypto giveaway"]
+  target_subniches: ["skincare", "makeup", "haircare", "fashion_styling", "thrift_sustainable", "fragrance", "nails", "beauty_general"]
+
+keywords:
+  skincare: [skincare, "skin care", serum, moisturizer, sunscreen, spf, cleanser, acne, retinol, "glass skin", "skin routine"]
+  makeup: [makeup, "make up", foundation, lipstick, eyeshadow, mascara, concealer, grwm, "get ready with me", "makeup tutorial", blush, contour]
+  haircare: [haircare, "hair care", "hair routine", shampoo, curls, "hair growth", hairstyle]
+  fashion_styling: [fashion, outfit, ootd, lookbook, "styling", "style tips", wardrobe, "capsule wardrobe", haul, "try on"]
+  thrift_sustainable: [thrift, thrifting, "second hand", "sustainable fashion", "slow fashion", vintage]
+  fragrance: [perfume, fragrance, cologne]
+  nails: [nails, "nail art", manicure]
+  beauty_general: [beauty, "beauty routine", "beauty tips", "beauty haul"]
+
+enrichment:
+  scrape_websites: false       # also look for a public email on the creator's own website (robots.txt respected)
+  user_agent: "InfluencerOutreachBot/1.0 (research; contact: you@example.com)"
+  min_video_desc_email_hits: 2 # an email in video descriptions must repeat in >=2 videos (avoids sponsor emails)
+
+sending:
+  daily_cap: 30
+  delay_seconds: 20            # pause between live sends
+  footer: "If you'd prefer not to hear from us, just reply 'unsubscribe' and we won't contact you again."
